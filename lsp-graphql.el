@@ -1,12 +1,11 @@
-(defun connect-lsp-graphql (port)
-  (list (expand-file-name "~/graphiql/node_modules/.bin/graphql")
-	"server"
-	"--port"
-	(number-to-string port)))
-
 (lsp-register-client
  (make-lsp-client
-  :new-connection (lsp-tcp-connection 'connect-lsp-graphql)
+  :new-connection (lsp-stdio-connection
+		   (list
+		    (expand-file-name "~/graphiql/node_modules/.bin/graphql")
+		    "server"
+		    "--schema"
+		    "http://localhost:7200/api/graphql"))
   :major-modes '(graphql-mode)
   :server-id 'graphql))
 
