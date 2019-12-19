@@ -2,10 +2,13 @@
  (make-lsp-client
   :new-connection (lsp-stdio-connection
 		   (list
-		    (expand-file-name "~/graphiql/node_modules/.bin/graphql")
-		    "server"
-		    "--schema"
-		    "http://localhost:7200/api/graphql"))
+		    "gql-language-server"
+		    "--stdio"
+		    "--config-dir"
+		    (expand-file-name "~/lsp-graphql")
+		    "--gql-path"
+		    (expand-file-name
+		     "~/lsp-graphql/node_modules/@playlyfe/gql")))
   :major-modes '(graphql-mode)
   :server-id 'graphql))
 
